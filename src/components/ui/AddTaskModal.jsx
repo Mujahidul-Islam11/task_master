@@ -1,13 +1,19 @@
 import React from 'react';
 import Modal from './Modal';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../../redux/features/tasks/tasksSlice';
 
 const AddTaskModal = ({ isOpen, setOpen }) => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
+    const dispatch = useDispatch();
 
     const onSubmit = (data) => {
-        console.log(data.title, data.desc, data.date, data.assign, data.priority)
+        dispatch(addTask(data));
+        reset();
+        setOpen(false);
     }
+
     return (
         <Modal isOpen={isOpen} setOpen={setOpen} title={"Add Your Task"}>
             <form className='flex flex-col gap-2 py-3' onSubmit={handleSubmit(onSubmit)}>
