@@ -45,7 +45,7 @@ const tasks = useSelector((state)=> state.tasksSlice.tasks);
             </div>
             <div className="space-y-3">
               {
-                tasks?.map(task=> <TaskCard key={task?.id} task={task} updatedStatus={"In-Progress"}/>)
+                tasks?.filter(item => item.status === "Pending")?.map(task=> <TaskCard key={task?.id} task={task} updatedStatus={"In-Progress"}/>)
               }
             </div>
           </div>
@@ -58,7 +58,7 @@ const tasks = useSelector((state)=> state.tasksSlice.tasks);
             </div>
             <div className="space-y-3">
             {
-                tasks?.map(task=> <TaskCard key={task?.id} task={task} updatedStatus={"Completed"}/>)
+                tasks?.filter(item => item.status === "In-Progress")?.map(task=> <TaskCard key={task?.id} task={task} updatedStatus={"Completed"}/>)
               }
             </div>
           </div>
@@ -71,7 +71,7 @@ const tasks = useSelector((state)=> state.tasksSlice.tasks);
             </div>
             <div className="space-y-3">
             {
-                tasks?.map(task=> <TaskCard key={task?.id} task={task} updatedStatus={"Pending"}/>)
+                tasks?.filter(item => item.status === "Completed")?.map(task=> <TaskCard key={task?.id} task={task} updatedStatus={"Pending"}/>)
               }
             </div>
           </div>
